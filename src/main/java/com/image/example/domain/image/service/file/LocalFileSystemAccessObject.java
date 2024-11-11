@@ -1,6 +1,7 @@
 package com.image.example.domain.image.service.file;
 
 import com.image.example.domain.image.exception.FileLoadFailException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
@@ -13,16 +14,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @Component
 public class LocalFileSystemAccessObject implements FileSystemAccessObject{
     private static final String IMAGE_DIRECTORY = "images/";
     @Override
     public boolean save(String path, MultipartFile file)  {
         try {
-            Path savePath = Paths.get( IMAGE_DIRECTORY + path);
-            Files.write(savePath, file.getBytes());
+
+            Path savePath = Paths.get( IMAGE_DIRECTORY + path+".png");
+            file.transferTo(savePath);
+//            Files.write(savePath, file.getBytes());
             return true;
         }catch (IOException e){
+            log.warn("IOException", e);
             return false;
         }
     }
