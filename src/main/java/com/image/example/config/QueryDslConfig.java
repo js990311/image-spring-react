@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class QueryDslConfig {
-    private final EntityManager em;
+     private EntityManager em;
 
     @Bean
     public JPAQueryFactory jpaQueryFactory(){
