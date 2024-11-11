@@ -22,13 +22,14 @@ public class ImageService {
 
     /* C */
     @Transactional
-    public void saveImage(MultipartFile targetImage){
+    public String saveImage(MultipartFile targetImage){
         Image image = new Image(targetImage.getOriginalFilename());
         boolean save = fileSystemAO.save(image.getPath(), targetImage);
         if(!save){
             throw new FileSaveFailException(targetImage.getOriginalFilename());
         }
         imageRepository.save(image);
+        return image.getPath();
     }
 
     /* R */
