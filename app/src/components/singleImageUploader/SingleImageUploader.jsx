@@ -29,6 +29,7 @@ const SingleImageUploader = () => {
                 }
             );
             console.log(resp);
+            setFilePath(resp.data);
         }catch (error){
             console.log(error);
         }
@@ -39,7 +40,7 @@ const SingleImageUploader = () => {
             <h1>이미지 업로드</h1>
             <input type="file" onChange={onChangeFile}/>
             <button onClick={onUpload}>업로드</button>
-            <p>{filePath}</p>
+            <p>저장된 파일 위치 : <span>{filePath}</span></p>
         </div>
     )
 }
