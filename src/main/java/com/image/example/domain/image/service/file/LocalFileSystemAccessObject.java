@@ -22,9 +22,8 @@ public class LocalFileSystemAccessObject implements FileSystemAccessObject{
     public boolean save(String path, MultipartFile file)  {
         try {
 
-            Path savePath = Paths.get( IMAGE_DIRECTORY + path+".png");
+            Path savePath = Paths.get( IMAGE_DIRECTORY + path);
             file.transferTo(savePath);
-//            Files.write(savePath, file.getBytes());
             return true;
         }catch (IOException e){
             log.warn("IOException", e);

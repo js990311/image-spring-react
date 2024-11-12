@@ -41,6 +41,10 @@ const SingleImageUploader = () => {
             <input type="file" onChange={onChangeFile}/>
             <button onClick={onUpload}>업로드</button>
             <p>저장된 파일 위치 : <span>{filePath}</span></p>
+            {
+                filePath !== "" &&
+                <img src={`http://localhost:8080/image/${filePath}`} alt="이미지불러오기실패"/>
+            }
         </div>
     )
 }

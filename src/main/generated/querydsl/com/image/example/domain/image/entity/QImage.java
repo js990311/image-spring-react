@@ -21,13 +21,13 @@ public class QImage extends EntityPathBase<Image> {
 
     public final StringPath extension = createString("extension");
 
-    public final StringPath filename = createString("filename");
-
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath originalName = createString("originalName");
 
     public final NumberPath<Long> ownerId = createNumber("ownerId", Long.class);
 
-    public final StringPath path = createString("path");
+    public final StringPath savePathName = createString("savePathName");
 
     public QImage(String variable) {
         super(Image.class, forVariable(variable));
