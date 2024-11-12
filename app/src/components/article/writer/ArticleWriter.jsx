@@ -1,5 +1,7 @@
 import {useState} from "react";
 import InputFile from "../../input/InputFile.jsx";
+import {i} from "vite/dist/node/types.d-aGj9QkWt.js";
+import axios from "axios";
 
 const ArticleWriter = () => {
     const [files, setFiles] = useState([
@@ -35,6 +37,27 @@ const ArticleWriter = () => {
         ))
     }
 
+    const onPost = async () => {
+        const formData = new FormData();
+        formData.append("files", files);
+        formData.append("content", content);
+
+        try {
+            const resp = await axios.post(
+                "http://localhost:8080/article/create",
+                formData,{
+                    headers : {
+                        "Content-Type": "multipart/form-data",
+                    }
+                }
+            );
+            console.log(resp);
+        }catch (error){
+            console.log(error);
+        }
+
+    }
+
     return (
         <div>
             <div>
@@ -51,7 +74,7 @@ const ArticleWriter = () => {
                     {
                         files.map((file, id) =>
                             (
-                                <li>
+                                <li key={id}>
                                     <InputFile
                                         id = {id}
                                         onChange={onChangeFiles}

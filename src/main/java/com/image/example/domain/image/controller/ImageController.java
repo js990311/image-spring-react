@@ -1,5 +1,6 @@
 package com.image.example.domain.image.controller;
 
+import com.image.example.domain.image.dto.ImageDto;
 import com.image.example.domain.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -17,8 +18,8 @@ public class ImageController {
 
     @PostMapping("/upload-single-image")
     public String uploadSingleImage(@RequestParam("file") MultipartFile file){
-        String path = imageService.saveImage(file);
-        return path;
+        ImageDto image = imageService.saveImage(file);
+        return image.getFilePath();
     }
 
     @GetMapping("/image/{filename}")

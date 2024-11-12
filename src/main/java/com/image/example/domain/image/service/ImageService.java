@@ -1,5 +1,6 @@
 package com.image.example.domain.image.service;
 
+import com.image.example.domain.image.dto.ImageDto;
 import com.image.example.domain.image.entity.Image;
 import com.image.example.domain.image.exception.FileSaveFailException;
 import com.image.example.domain.image.repository.ImageRepository;
@@ -23,25 +24,25 @@ public class ImageService {
 
     /* C */
     @Transactional
-    public String saveImage(MultipartFile targetImage){
+    public ImageDto saveImage(MultipartFile targetImage){
         Image image = new Image(targetImage.getOriginalFilename());
         boolean save = fileSystemAO.save(image.getPath(), targetImage);
         if(!save){
             throw new FileSaveFailException(targetImage.getOriginalFilename());
         }
         imageRepository.save(image);
-        return image.getPath();
+        return ImageDto.from(image);
     }
 
     @Transactional
-    public String saveImage(MultipartFile targetImage, Long ownerId){
+    public ImageDto saveImage(MultipartFile targetImage, Long ownerId){
         Image image = new Image(targetImage.getOriginalFilename(), ownerId);
         boolean save = fileSystemAO.save(image.getPath(), targetImage);
         if(!save){
             throw new FileSaveFailException(targetImage.getOriginalFilename());
         }
         imageRepository.save(image);
-        return image.getPath();
+        return ImageDto.from(image);
     }
 
     /* R */
