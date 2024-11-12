@@ -33,6 +33,17 @@ public class ImageService {
         return image.getPath();
     }
 
+    @Transactional
+    public String saveImage(MultipartFile targetImage, Long ownerId){
+        Image image = new Image(targetImage.getOriginalFilename(), ownerId);
+        boolean save = fileSystemAO.save(image.getPath(), targetImage);
+        if(!save){
+            throw new FileSaveFailException(targetImage.getOriginalFilename());
+        }
+        imageRepository.save(image);
+        return image.getPath();
+    }
+
     /* R */
     public Resource loadImage(String filename){
         return fileSystemAO.load(filename);

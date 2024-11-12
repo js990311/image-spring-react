@@ -45,4 +45,10 @@ public class Image {
         this.savePathName = UUID.randomUUID().toString();
         this.extension = getExtension();
     }
+
+    public Image(String fileName, Long ownerId) {
+        this(fileName);
+        this.originalName = fileName;
+        this.ownerId = ownerId;
+    }
 }
