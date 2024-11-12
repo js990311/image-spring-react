@@ -1,6 +1,5 @@
 import {useState} from "react";
 import InputFile from "../../input/InputFile.jsx";
-import {i} from "vite/dist/node/types.d-aGj9QkWt.js";
 import axios from "axios";
 
 const ArticleWriter = () => {
@@ -39,7 +38,11 @@ const ArticleWriter = () => {
 
     const onPost = async () => {
         const formData = new FormData();
-        formData.append("files", files);
+        files.forEach((file) => {
+            if(file) {
+                formData.append("files", file);
+            }
+        })
         formData.append("content", content);
 
         try {
@@ -90,6 +93,7 @@ const ArticleWriter = () => {
                     첨부파일 추가하기
                 </button>
             </div>
+            <button onClick={onPost}>제출</button>
         </div>
     )
 }

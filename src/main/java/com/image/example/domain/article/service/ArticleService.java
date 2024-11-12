@@ -18,8 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class ArticleService {
-    private ArticleRepository articleRepository;
-    private ImageService imageService;
+    private final ArticleRepository articleRepository;
+    private final ImageService imageService;
 
     /* C */
     @Transactional
