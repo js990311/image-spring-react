@@ -36,6 +36,12 @@ public class ArticleService {
 
     /* R */
 
+    public ArticleDto findById(Long id){
+        Article article = articleRepository.findById(id).orElseThrow();
+        List<ImageDto> images = imageService.findByImages(id);
+        return ArticleDto.from(article, images);
+    }
+
     /* U */
 
     /* D */

@@ -1,6 +1,7 @@
 import {useState} from "react";
 import InputFile from "../../input/InputFile.jsx";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const ArticleWriter = () => {
     const [files, setFiles] = useState([
@@ -8,6 +9,7 @@ const ArticleWriter = () => {
     ]);
 
     const [content, setContent ] = useState('');
+    const nav = useNavigate();
 
     const onChangeFiles = (id, file) => {
         const alterFiles = files.map(
@@ -54,7 +56,8 @@ const ArticleWriter = () => {
                     }
                 }
             );
-            console.log(resp);
+            console.log(resp.data);
+            nav(`/article/${resp.data.id}`);
         }catch (error){
             console.log(error);
         }

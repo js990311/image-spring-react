@@ -19,4 +19,11 @@ public class ArticleController {
         ArticleDto article = articleService.createArticle(form.getContent(), form.getFiles());
         return article;
     }
+
+    @GetMapping("/{id}")
+    public ArticleDto getArticle(
+            @PathVariable("id") Long id
+    ){
+        return articleService.findById(id);
+    }
 }

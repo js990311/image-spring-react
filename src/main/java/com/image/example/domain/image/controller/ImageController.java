@@ -19,7 +19,7 @@ public class ImageController {
     @PostMapping("/upload-single-image")
     public String uploadSingleImage(@RequestParam("file") MultipartFile file){
         ImageDto image = imageService.saveImage(file);
-        return image.getFilePath();
+        return image.getPath();
     }
 
     @GetMapping("/image/{filename}")

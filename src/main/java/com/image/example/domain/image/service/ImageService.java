@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -50,6 +48,10 @@ public class ImageService {
         return fileSystemAO.load(filename);
     }
 
+    public List<ImageDto> findByImages(Long ownerId){
+        List<Image> images = imageRepository.findByOwnerId(ownerId);
+        return images.stream().map(ImageDto::from).toList();
+    }
     /* U */
 
     /* D */
